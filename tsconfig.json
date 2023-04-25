@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2020",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@app/football-fixtures": ["apps/football-fixtures/src"],
+      "@app/common": ["libs/common/src"],
+      "@app/football-fixtures/*": ["apps/football-fixtures/src/*"],
+      "@app/common/*": ["libs/common/src/*"]
+    }
+  }
+}

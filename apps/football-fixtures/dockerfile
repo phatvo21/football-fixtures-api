@@ -1,0 +1,29 @@
+# Install package dependencies
+FROM node:16-alpine AS dependency
+
+WORKDIR /football-fixtures
+
+COPY package*.json ./
+RUN npm ci
+
+# Build source
+FROM dependency AS base
+COPY . .
+
+# Build source
+FROM base AS build
+RUN npm run build:football-fixtures
+
+# Ship compiled sources
+FROM dependency
+
+COPY --from=build /football-fixtures/dist ./dist
+
+RUN npm prune --production
+
+EXPOSE 4000
+ENV NO_COLOR=true
+ARG COMMIT_HASH
+ENV COMMIT_HASH=$COMMIT_HASH
+
+CMD ["npm", "run", "start:football-fixtures:prod"]
