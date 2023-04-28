@@ -22,7 +22,10 @@
     "db:restore": "docker-compose exec mongo sh database/restore.sh",
     "test:e2e": "jest --runInBand --forceExit",
     "test:compose": "docker-compose -f ./docker-compose.testing.yaml up -d && npm run test",
-    "test": "jest"
+    "test": "jest",
+    "typeorm": "ts-node --project ./tsconfig.json -r tsconfig-paths/register ./tools/typeorm.custom-cli.ts",
+    "football-fixtures:migration:run": "npm run typeorm migration:run -- -d apps/football-fixtures/orm.config.ts",
+    "migration:create": "npm run typeorm migration:create ./apps/football-fixtures/src/fixture/data/migrations/testmi"
   },
   "husky": {
     "hooks": {
@@ -61,7 +64,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.3.0",
-    "typeorm": "^0.3.15"
+    "typeorm": "^0.3.11"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.2",

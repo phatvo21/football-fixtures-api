@@ -1,12 +1,12 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 export class BaseEntity {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column({ default: new Date() })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column({ default: new Date() })
+  @CreateDateColumn()
   updatedAt: Date;
 }

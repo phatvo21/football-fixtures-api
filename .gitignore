@@ -47,3 +47,5 @@ globalConfig.json
 --quiet/_cacache
 --quiet/_cacache/content-v2
 
+./data
+

@@ -1,10 +1,14 @@
-import { MigrationInterface, QueryRunner } from "typeorm"
+import { MigrationInterface, QueryRunner, TableColumn } from "typeorm"
 
 export class Testmi1682671836525 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(
-          `ALTER TABLE "test" RENAME COLUMN "createdAt" TO "name"`,
+        await queryRunner.addColumn(
+          "test",
+          new TableColumn({
+              name: "questionId",
+              type: "int",
+          }),
         )
     }
 

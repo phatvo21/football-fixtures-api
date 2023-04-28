@@ -1,14 +1,6 @@
 version: '3.3'
 
 services:
-  mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: football
-    expose:
-      - '3306'
-
   football-fixtures:
     image: football-fixtures
     container_name: football-fixtures-api
@@ -18,16 +10,47 @@ services:
         - COMMIT_HASH=COMMIT_HASH
       dockerfile: ./apps/football-fixtures/dockerfile
     environment:
-      HOST: 127.0.0.1
+      HOST: 0.0.0.0
       PORT: 4000
       NODE_ENV: production
       DB_NAME: football
       DB_USER: root
       DB_PASSWORD: root
-      DB_HOST: mysql
+      DB_HOST: db
       DB_TYPE: "mysql"
       DB_PORT: 3306
     ports:
-      - 4000:3000
+      - 4000:4000
     depends_on:
-      - mysql
+      db:
+        condition: service_healthy
+    networks:
+      - football-fixture
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: football
+      MYSQL_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    networks:
+      - football-fixture
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+networks:
+  football-fixture:
+    driver: bridge
+
+volumes:
+  db_data: {}

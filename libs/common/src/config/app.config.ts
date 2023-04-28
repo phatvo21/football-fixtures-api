@@ -19,13 +19,13 @@ import { registerAs } from '@nestjs/config';
  * @param {Configuration} config - Configuration object
  */
 export default registerAs('app', () => ({
-  nodeEnv: process.env.NODE_ENV,
-  host: process.env.HOST,
-  port: +process.env.PORT,
-  databaseUser: process.env.DB_USER,
-  databasePassword: process.env.DB_PASSWORD,
-  databaseName: process.env.DB_NAME,
-  databaseHost: process.env.DB_HOST,
-  databasePort: +process.env.DB_PORT,
-  databaseType: process.env.DB_TYPE,
+  nodeEnv: process.env.NODE_ENV ?? 'production',
+  host: process.env.HOST ?? '127.0.0.1',
+  port: +process.env.PORT ?? 4000,
+  databaseUser: process.env.DB_USER ?? 'root',
+  databasePassword: process.env.DB_PASSWORD ?? 'root',
+  databaseName: process.env.DB_NAME ?? 'football',
+  databaseHost: process.env.DB_HOST ?? '127.0.0.1',
+  databasePort: +process.env.DB_PORT ?? 3306,
+  databaseType: process.env.DB_TYPE ?? 'mysql',
 }));

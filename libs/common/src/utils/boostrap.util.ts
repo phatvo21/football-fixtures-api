@@ -32,10 +32,13 @@ export const bootstrap = async (appModule, swaggerConfig: { title: string; serve
 
   app.useGlobalFilters(new AllExceptionsFilter());
   const appHost: string = config.get<string>('app.host', '0.0.0.0');
-  const appPort: number = config.get<number>('app.port', 3000);
+  const appPort: number = config.get<number>('app.port', 4000);
 
   const commitHash: string = config.get<string>('COMMIT_HASH') || getCommitHash();
   AddSwagger(app, swaggerConfig.title, swaggerConfig.server, commitHash);
+
+  // Starts listening for shutdown hooks
+  app.enableShutdownHooks();
 
   await app.startAllMicroservices();
   await app.listen(appPort, appHost);
