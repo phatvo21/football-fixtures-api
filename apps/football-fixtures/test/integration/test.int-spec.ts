@@ -2,10 +2,10 @@
 import { BaseModule } from '@app/common/modules';
 import {
   generateMockServer,
-  generateRequest, getEntity,
+  generateRequest, getRepository,
   RequestType, ServerType,
 } from '@app/common/utils/database-test.util';
-import { TestEntity } from '@app/football-fixtures/fixture/data/entities/test.entity';
+import { TestEntity } from '@app/football-fixtures/db/entities/test.entity';
 import { FixtureModule } from '@app/football-fixtures/fixture/fixture.module';
 
 describe('notifications (e2e)', () => {
@@ -19,7 +19,7 @@ describe('notifications (e2e)', () => {
       FixtureModule,
     ]);
     request = generateRequest(server);
-    entity = server.module.get(getEntity(TestEntity));
+    entity = server.module.get(getRepository(TestEntity));
   });
 
   afterAll(async () => {
