@@ -2,10 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
 
 export class BaseEntityDto {
-  @ApiProperty({ example: 'Aolg5sBh2jQdrhS2i' })
+  @ApiProperty({ example: '57e89869-4647-4e46-979b-643d2eda8316' })
   @ApiProperty({ readOnly: true })
   @IsOptional()
-  _id: string;
+  id: string;
 
   @ApiProperty({ readOnly: true })
   @IsOptional()

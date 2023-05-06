@@ -2,18 +2,18 @@ import { BaseEntity } from '@app/common/enitities';
 import { TournamentEntity } from '@app/football-fixtures/db/entities/tournament.entity';
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
-@Entity({name: 'team'})
+@Entity({ name: 'team' })
 export class TeamEntity extends BaseEntity {
   @Column()
-  name!: string
+  name!: string;
 
   @Column()
-  code!: string
+  code!: string;
 
   @Column()
-  logo!: string
+  logo!: string;
 
-  @OneToOne(() => TournamentEntity, {cascade: true})
-  @JoinColumn({name: "tournamentId"})
-  tournamentId!: string;
+  @OneToOne(() => TournamentEntity, { cascade: true })
+  @JoinColumn({ name: 'tournamentId' })
+  tournament: TournamentEntity;
 }

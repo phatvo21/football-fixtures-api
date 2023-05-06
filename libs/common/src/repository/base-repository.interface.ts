@@ -1,15 +1,15 @@
-import {DeleteResult, FindManyOptions} from 'typeorm';
+import { DeleteResult, FindManyOptions } from 'typeorm';
 
 export interface BaseRepositoryInterface<T> {
-    create(data: T | any): Promise<T>;
+  create(data: T | any): Promise<T>;
 
-    findOneById(id: string): Promise<T>;
+  findOneById(id: string): Promise<T>;
 
-    findByCondition(filterCondition: any): Promise<T>;
+  findByCondition(filterCondition: any): Promise<T>;
 
-    findAll(): Promise<T[]>;
+  findAll(): Promise<T[]>;
 
-    remove(id: string): Promise<DeleteResult>;
+  remove(id: string): Promise<DeleteResult>;
 
-    findWithRelations(relations: FindManyOptions<T>): Promise<T[]>;
+  findWithRelations(relations: FindManyOptions<T>): Promise<T[]>;
 }

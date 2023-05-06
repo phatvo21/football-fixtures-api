@@ -3,9 +3,6 @@ import { FixtureModule } from '@app/football-fixtures/fixture/fixture.module';
 import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [
-    BaseModule,
-    FixtureModule
-  ]
+  imports: [BaseModule, FixtureModule],
 })
 export class AppModule {}

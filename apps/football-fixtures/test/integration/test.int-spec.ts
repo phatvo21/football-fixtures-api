@@ -2,8 +2,10 @@
 import { BaseModule } from '@app/common/modules';
 import {
   generateMockServer,
-  generateRequest, getRepository,
-  RequestType, ServerType,
+  generateRequest,
+  getRepository,
+  RequestType,
+  ServerType,
 } from '@app/common/utils/database-test.util';
 import { TestEntity } from '@app/football-fixtures/db/entities/test.entity';
 import { FixtureModule } from '@app/football-fixtures/fixture/fixture.module';
@@ -14,10 +16,7 @@ describe('notifications (e2e)', () => {
   let entity: any;
 
   beforeAll(async () => {
-    server = await generateMockServer([
-      BaseModule,
-      FixtureModule,
-    ]);
+    server = await generateMockServer([BaseModule, FixtureModule]);
     request = generateRequest(server);
     entity = server.module.get(getRepository(TestEntity));
   });
@@ -31,7 +30,7 @@ describe('notifications (e2e)', () => {
       const data = new TestEntity();
       data.createdAt = new Date();
       data.updatedAt = new Date();
-      await entity.save(data)
+      await entity.save(data);
     });
 
     afterAll(async () => {

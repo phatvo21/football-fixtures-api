@@ -5,21 +5,39 @@ import { TeamEntity } from '@app/football-fixtures/db/entities/team.entity';
 import { TestEntity } from '@app/football-fixtures/db/entities/test.entity';
 import { TournamentEntity } from '@app/football-fixtures/db/entities/tournament.entity';
 import { VenueEntity } from '@app/football-fixtures/db/entities/venue.entity';
+import { FixtureRepository } from '@app/football-fixtures/fixture/data/repositories/fixture.repository';
 import { TestRepository } from '@app/football-fixtures/fixture/data/repositories/test.repository';
+import { FixtureController } from '@app/football-fixtures/fixture/fixture.controller';
+import { FixtureService } from '@app/football-fixtures/fixture/fixture.service';
 import { TestController } from '@app/football-fixtures/fixture/test.controller';
 import { TestService } from '@app/football-fixtures/fixture/test.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TestEntity, TournamentEntity, ScoreEntity, VenueEntity, TeamEntity, SeasonEntity, FixtureEntity])],
+  imports: [
+    TypeOrmModule.forFeature([
+      TestEntity,
+      TournamentEntity,
+      ScoreEntity,
+      VenueEntity,
+      TeamEntity,
+      SeasonEntity,
+      FixtureEntity,
+    ]),
+  ],
   providers: [
     {
       provide: 'TestInterface',
-      useClass: TestRepository
+      useClass: TestRepository,
     },
-    TestService
+    {
+      provide: 'FixtureInterface',
+      useClass: FixtureRepository,
+    },
+    TestService,
+    FixtureService,
   ],
-  controllers: [TestController]
+  controllers: [FixtureController, TestController],
 })
 export class FixtureModule {}

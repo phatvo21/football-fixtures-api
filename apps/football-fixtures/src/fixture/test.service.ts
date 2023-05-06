@@ -6,8 +6,7 @@ export class TestService {
   constructor(
     @Inject('TestInterface')
     private readonly testRepo: TestInterface,
-  ) {
-  }
+  ) {}
 
   public async findAll(): Promise<any> {
     return this.testRepo.findAll();

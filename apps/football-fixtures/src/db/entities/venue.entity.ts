@@ -1,14 +1,14 @@
 import { BaseEntity } from '@app/common/enitities';
 import { Column, Entity } from 'typeorm';
 
-@Entity({name: 'venue'})
+@Entity({ name: 'venue' })
 export class VenueEntity extends BaseEntity {
   @Column()
-  name!: string
+  name!: string;
 
   @Column()
-  city!: string
+  city!: string;
 
   @Column()
-  country!: string
+  country!: string;
 }

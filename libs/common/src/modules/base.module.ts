@@ -5,11 +5,7 @@ import { BaseLoggerModule } from '@app/common/modules/base-logger.module';
 import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [
-    BaseConfigModule,
-    BaseLoggerModule,
-    BaseDatabaseModule
-  ],
+  imports: [BaseConfigModule, BaseLoggerModule, BaseDatabaseModule],
   controllers: [HealthController],
 })
 export class BaseModule {}

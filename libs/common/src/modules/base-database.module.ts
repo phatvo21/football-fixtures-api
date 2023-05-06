@@ -3,8 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import path from 'path';
 
-const entityPath: string = path.join(__dirname, 'src/**/data/entities/*.entity.js');
-const migrationPath: string = path.join(__dirname, 'src/**/data/migrations/*.js');
+const entityPath: string = path.join(__dirname, 'src/db/entities/*.entity.js');
+const migrationPath: string = path.join(__dirname, 'src/db/migrations/*.js');
 
 @Module({
   imports: [
@@ -16,14 +16,14 @@ const migrationPath: string = path.join(__dirname, 'src/**/data/migrations/*.js'
         port: configService.get('app.databasePort'),
         username: configService.get('app.databaseUser'),
         password: configService.get('app.databasePassword'),
-        database:  configService.get('app.databaseName'),
+        database: configService.get('app.databaseName'),
         entities: [entityPath],
         migrations: [migrationPath],
-        synchronize: true,
+        synchronize: false,
         autoLoadEntities: true,
         cli: {
-          entitiesDir: `apps/${process.env.SERVICE_NAME}/src/**/data/entities`,
-          migrationsDir:  `apps/${process.env.SERVICE_NAME}/src/**/data/migrations`,
+          entitiesDir: `apps/${process.env.SERVICE_NAME}/src/db/entities`,
+          migrationsDir: `apps/${process.env.SERVICE_NAME}/src/db/migrations`,
         },
       }),
       inject: [ConfigService],

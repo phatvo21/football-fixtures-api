@@ -9,7 +9,7 @@ import supertest from 'supertest';
 
 export interface ServerType {
   app: NestFastifyApplication;
-  module: TestingModule
+  module: TestingModule;
 }
 export interface RequestType {
   agent: supertest.SuperTest<supertest.Test>;
@@ -36,10 +36,11 @@ export const generateMockServer = async (modules: any[] = []): Promise<ServerTyp
   await app.getHttpAdapter().getInstance().ready();
   return {
     app,
-    module: moduleFixture
+    module: moduleFixture,
   };
 };
 
 export const getRepository = <T extends EntityClassOrSchema>(entity: T) => getRepositoryToken(entity);
 
-export const wait = async (time = 500): Promise<unknown> => new Promise((resolve) => setTimeout(() => resolve(''), time));
+export const wait = async (time = 500): Promise<unknown> =>
+  new Promise((resolve) => setTimeout(() => resolve(''), time));

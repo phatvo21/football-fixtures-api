@@ -1,4 +1,4 @@
-import {TestController} from '@app/football-fixtures/fixture/test.controller';
+import { TestController } from '@app/football-fixtures/fixture/test.controller';
 import { TestService } from '@app/football-fixtures/fixture/test.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
@@ -17,10 +17,7 @@ describe('TestController', () => {
 
     const app: TestingModule = await Test.createTestingModule({
       controllers: [TestController],
-      providers: [
-        TestService,
-        TestServiceProvider
-      ]
+      providers: [TestService, TestServiceProvider],
     }).compile();
 
     testController = app.get<TestController>(TestController);
