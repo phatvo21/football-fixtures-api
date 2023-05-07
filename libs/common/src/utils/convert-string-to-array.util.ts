@@ -1,3 +1,3 @@
 export const convertStringToArray = (str: string): Array<string> => {
-  return str.split(',').map((str) => str.trim());
+  return str.split(',').map((string) => string.trim());
 };

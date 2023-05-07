@@ -1,4 +1,3 @@
-import { MapInterceptor } from '@automapper/nestjs';
 import { applyDecorators, Type, UseInterceptors } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -10,9 +9,9 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 
-import BadRequestDto from '../dto/badRequest.dto';
-import InternalServerErrorDto from '../dto/internalServerError.dto';
-import NotFoundDTO from '../dto/notFound.dto';
+import BadRequestDto from '../dto/bad-request.dto';
+import InternalServerErrorDto from '../dto/internal-serve-error.dto';
+import NotFoundDTO from '../dto/not-found.dto';
 
 export const UpdateEndpoint = (
   summary: string,
@@ -46,7 +45,7 @@ export const UpdateEndpoint = (
   }
 
   if (outputDto && entityType) {
-    decoratorsToApply.push(UseInterceptors(MapInterceptor(outputDto, entityType)));
+    decoratorsToApply.push(UseInterceptors(outputDto, entityType));
   }
 
   return applyDecorators(...decoratorsToApply);

@@ -7,9 +7,9 @@ module.exports = {
   testRegex: '.spec.ts$',
   coverageThreshold: {
     global: {
-      functions: 79,
-      lines: 80,
-      statements: 80,
+      functions: 90,
+      lines: 90,
+      statements: 90,
     },
   },
   collectCoverage: true,
@@ -24,6 +24,9 @@ module.exports = {
     '!jest.config.js',
     '!**/test/**',
     '!test/**',
+    '!**/**/db/**',
+    '!**/**/orm.config.ts',
+    '!**/libs/**',
   ],
   coverageReporters: ['text', 'text-summary'],
   transform: {

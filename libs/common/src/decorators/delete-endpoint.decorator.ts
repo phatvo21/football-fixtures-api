@@ -7,8 +7,8 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 
-import InternalServerErrorDto from '../dto/internalServerError.dto';
-import NotFoundDTO from '../dto/notFound.dto';
+import InternalServerErrorDto from '../dto/internal-serve-error.dto';
+import NotFoundDTO from '../dto/not-found.dto';
 
 export const DeleteEndpoint = (summary: string) =>
   applyDecorators(
@@ -24,5 +24,5 @@ export const DeleteEndpoint = (summary: string) =>
       description: 'Entity not found',
       type: NotFoundDTO,
     }),
-    ApiParam({ name: 'id', type: String, example: '60d0161cba52d105504fae34' }),
+    ApiParam({ name: 'id', type: String, example: 'b01144e1-b74e-465a-a406-c62fc60f4550' }),
   );

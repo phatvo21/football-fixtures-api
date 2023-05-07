@@ -9,7 +9,7 @@ export const ListEndpoint = (summary: string, outputDto: Type<any>, entityType: 
     ApiOperation({ summary }),
     ApiOkResponse({
       description: 'List returned successfully',
-      type: [outputDto],
+      type: outputDto,
     }),
     ApiBadRequestResponse({
       description: 'Invalid params',

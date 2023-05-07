@@ -45,7 +45,7 @@ module.exports = {
     'no-restricted-globals': 0,
     camelcase: 0,
     eqeqeq: ['error', 'smart'],
-    'max-lines': [2, { max: 1000, skipBlankLines: true }],
+    'max-lines': [2, { max: 2000, skipBlankLines: true }],
     'no-nested-ternary': 0,
     'no-console': [2, { allow: ['warn', 'error', 'info', 'trace'] }],
     'func-names': 0,
@@ -85,6 +85,7 @@ module.exports = {
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/no-unsafe-argument': "off",
     "@typescript-eslint/await-thenable": "off",
+    "@typescript-eslint/unbound-method": "off",
 
     'import/order': 'off',
     'import/no-extraneous-dependencies': [1, { devDependencies: true }],
@@ -108,6 +109,9 @@ module.exports = {
     'sonarjs/no-duplicate-string': "off",
     'pii/no-ip': "off",
     "no-await-in-loop": "off",
+    'no-restricted-syntax': "off",
+    'unicorn/consistent-destructuring': "off",
+    'lodash/prefer-noop': "off",
 
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
 

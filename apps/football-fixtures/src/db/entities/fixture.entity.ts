@@ -15,36 +15,36 @@ export class FixtureEntity extends BaseEntity {
   })
   matchStatus!: FixtureStatusEnum;
 
-  @CreateDateColumn()
+  @Column()
   round!: number;
 
   @Column()
-  matchDate!: Date;
+  matchDate!: string;
 
   @Column()
   matchTime!: string;
 
-  @OneToOne(() => SeasonEntity, { cascade: true })
+  @OneToOne(() => SeasonEntity, { cascade: true, onDelete: 'CASCADE'  })
   @JoinColumn({ name: 'seasonId' })
   season: SeasonEntity;
 
-  @OneToOne(() => TournamentEntity, { cascade: true })
+  @OneToOne(() => TournamentEntity, { cascade: true, onDelete: 'CASCADE'  })
   @JoinColumn({ name: 'tournamentId' })
   tournament: TournamentEntity;
 
-  @OneToOne(() => VenueEntity, { cascade: true })
+  @OneToOne(() => VenueEntity, { cascade: true, onDelete: 'CASCADE'  })
   @JoinColumn({ name: 'venueId' })
   venue: VenueEntity;
 
-  @OneToOne(() => ScoreEntity, { cascade: true })
+  @OneToOne(() => ScoreEntity, { cascade: true, onDelete: 'CASCADE'  })
   @JoinColumn({ name: 'scoreId' })
   score: ScoreEntity;
 
-  @OneToOne(() => TeamEntity, { cascade: true })
+  @OneToOne(() => TeamEntity, { cascade: true, onDelete: 'CASCADE'  })
   @JoinColumn({ name: 'homeTeamId' })
   homeTeam: TeamEntity;
 
-  @OneToOne(() => TeamEntity, { cascade: true })
+  @OneToOne(() => TeamEntity, { cascade: true, onDelete: 'CASCADE'  })
   @JoinColumn({ name: 'awayTeamId' })
   awayTeam: TeamEntity;
 }
