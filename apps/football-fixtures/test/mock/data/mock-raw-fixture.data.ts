@@ -1,9 +1,9 @@
-import { teamSeedData } from '@app/football-fixtures/db/factories/data/team';
-import { scoreSeedData } from '@app/football-fixtures/db/factories/data/score';
-import { venueSeedData } from '@app/football-fixtures/db/factories/data/venue';
-import { seasonSeedData } from '@app/football-fixtures/db/factories/data/season';
-import { tournamentSeedData } from '@app/football-fixtures/db/factories/data/tournament';
 import { FixtureStatusEnum } from '@app/football-fixtures/db/entities/enum/fixture-status.enum';
+import { scoreSeedData } from '@app/football-fixtures/db/factories/data/score';
+import { seasonSeedData } from '@app/football-fixtures/db/factories/data/season';
+import { teamSeedData } from '@app/football-fixtures/db/factories/data/team';
+import { tournamentSeedData } from '@app/football-fixtures/db/factories/data/tournament';
+import { venueSeedData } from '@app/football-fixtures/db/factories/data/venue';
 
 export const mockRawFixtureData = [
   {
@@ -45,7 +45,7 @@ export const mockRawFixtureData = [
     homeTeamId: teamSeedData[22].id,
     awayTeamId: teamSeedData[23].id,
   },
-]
+];
 
 export const mockRawTeamData = teamSeedData;
 export const mockRawScoreData = scoreSeedData;

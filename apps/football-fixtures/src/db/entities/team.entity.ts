@@ -13,7 +13,7 @@ export class TeamEntity extends BaseEntity {
   @Column()
   logo!: string;
 
-  @OneToOne(() => TournamentEntity, { cascade: true, onDelete: 'CASCADE'  })
+  @OneToOne(() => TournamentEntity, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'tournamentId' })
   tournament: TournamentEntity;
 }

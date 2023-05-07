@@ -5,7 +5,7 @@ import { SeasonEntity } from '@app/football-fixtures/db/entities/season.entity';
 import { TeamEntity } from '@app/football-fixtures/db/entities/team.entity';
 import { TournamentEntity } from '@app/football-fixtures/db/entities/tournament.entity';
 import { VenueEntity } from '@app/football-fixtures/db/entities/venue.entity';
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
 @Entity({ name: 'fixture' })
 export class FixtureEntity extends BaseEntity {
@@ -24,27 +24,27 @@ export class FixtureEntity extends BaseEntity {
   @Column()
   matchTime!: string;
 
-  @OneToOne(() => SeasonEntity, { cascade: true, onDelete: 'CASCADE'  })
+  @OneToOne(() => SeasonEntity, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'seasonId' })
   season: SeasonEntity;
 
-  @OneToOne(() => TournamentEntity, { cascade: true, onDelete: 'CASCADE'  })
+  @OneToOne(() => TournamentEntity, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'tournamentId' })
   tournament: TournamentEntity;
 
-  @OneToOne(() => VenueEntity, { cascade: true, onDelete: 'CASCADE'  })
+  @OneToOne(() => VenueEntity, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'venueId' })
   venue: VenueEntity;
 
-  @OneToOne(() => ScoreEntity, { cascade: true, onDelete: 'CASCADE'  })
+  @OneToOne(() => ScoreEntity, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'scoreId' })
   score: ScoreEntity;
 
-  @OneToOne(() => TeamEntity, { cascade: true, onDelete: 'CASCADE'  })
+  @OneToOne(() => TeamEntity, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'homeTeamId' })
   homeTeam: TeamEntity;
 
-  @OneToOne(() => TeamEntity, { cascade: true, onDelete: 'CASCADE'  })
+  @OneToOne(() => TeamEntity, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'awayTeamId' })
   awayTeam: TeamEntity;
 }

@@ -1,7 +1,7 @@
 import { FixtureStatusEnum } from '@app/football-fixtures/db/entities/enum/fixture-status.enum';
 import { FixtureQueryFilter } from '@app/football-fixtures/fixture/interfaces/fixture-query.filter.interface';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsDateString, IsEnum, IsOptional, IsString, IsUUID, Validate } from 'class-validator';
+import { IsArray, IsDateString, IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class GetFixtureQueryDto implements FixtureQueryFilter {
   @IsOptional()

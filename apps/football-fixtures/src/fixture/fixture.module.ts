@@ -13,14 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      TournamentEntity,
-      ScoreEntity,
-      VenueEntity,
-      TeamEntity,
-      SeasonEntity,
-      FixtureEntity,
-    ]),
+    TypeOrmModule.forFeature([TournamentEntity, ScoreEntity, VenueEntity, TeamEntity, SeasonEntity, FixtureEntity]),
   ],
   providers: [
     {

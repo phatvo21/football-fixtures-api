@@ -112,6 +112,7 @@ module.exports = {
     'no-restricted-syntax': "off",
     'unicorn/consistent-destructuring': "off",
     'lodash/prefer-noop': "off",
+    'no-plusplus': "off",
 
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
 

@@ -6,25 +6,28 @@ import {
   generateRequest,
   getRepository,
   RequestType,
-  ServerType, wait,
+  ServerType,
+  wait,
 } from '@app/common/utils/database-test.util';
-import { FixtureModule } from '@app/football-fixtures/fixture/fixture.module';
 import { FixtureEntity } from '@app/football-fixtures/db/entities/fixture.entity';
-import { Repository } from 'typeorm';
+import { ScoreEntity } from '@app/football-fixtures/db/entities/score.entity';
 import { SeasonEntity } from '@app/football-fixtures/db/entities/season.entity';
 import { TeamEntity } from '@app/football-fixtures/db/entities/team.entity';
 import { TournamentEntity } from '@app/football-fixtures/db/entities/tournament.entity';
 import { VenueEntity } from '@app/football-fixtures/db/entities/venue.entity';
-import { ScoreEntity } from '@app/football-fixtures/db/entities/score.entity';
+import { FixtureModule } from '@app/football-fixtures/fixture/fixture.module';
+import { Repository } from 'typeorm';
+
 import {
   mockRawFixtureData,
   mockRawScoreData,
   mockRawSeasonData,
-  mockRawTeamData, mockRawTournamentData,
+  mockRawTeamData,
+  mockRawTournamentData,
   mockRawVenueData,
 } from '../mock/data/mock-raw-fixture.data';
 
-describe('fixtures (integration)', () => {
+describe('fixtures & fixture calendar (integration)', () => {
   let server: ServerType;
   let request: RequestType;
   let fixtureRepo: Repository<FixtureEntity>;
@@ -44,73 +47,66 @@ describe('fixtures (integration)', () => {
     venueRepo = server.module.get(getRepository(VenueEntity));
     scoreRepo = server.module.get(getRepository(ScoreEntity));
 
-
     await clearDB(fixtureRepo);
+    await wait(2000);
+
+    // Insert season data
+    await seasonRepo.insert(mockRawSeasonData);
+
+    // Insert venue data
+    await venueRepo.insert(mockRawVenueData);
+
+    // Insert venue data
+    await tournamentRepo.insert(mockRawTournamentData);
+
+    // Insert venue data
+    await scoreRepo.insert(mockRawScoreData);
+    await wait(1000);
+
+    // Insert team data
+    for (const mock of mockRawTeamData) {
+      const team = new TeamEntity();
+      team.id = mock.id;
+      team.logo = mock.logo;
+      team.name = mock.name;
+      team.code = mock.code;
+      team.tournament = await tournamentRepo.findOneBy({ id: mock.tournamentId });
+      await teamRepo.save(team);
+    }
+
+    await wait(2000);
+    // Insert team data
+    for (const rawData of mockRawFixtureData) {
+      const fixture = new FixtureEntity();
+      fixture.id = rawData.id;
+      fixture.matchDate = rawData.matchDate;
+      fixture.matchTime = rawData.matchTime;
+      fixture.matchStatus = rawData.matchStatus;
+      fixture.round = rawData.round;
+      fixture.tournament = await tournamentRepo.findOneBy({ id: rawData.tournamentId });
+      fixture.season = await seasonRepo.findOneBy({ id: rawData.seasonId });
+      fixture.score = await scoreRepo.findOneBy({ id: rawData.scoreId });
+      fixture.awayTeam = await teamRepo.findOneBy({ id: rawData.awayTeamId });
+      fixture.homeTeam = await teamRepo.findOneBy({ id: rawData.homeTeamId });
+      fixture.venue = await venueRepo.findOneBy({ id: rawData.venueId });
+      await fixtureRepo.save(fixture);
+    }
   });
 
   afterAll(async () => {
+    await clearDB(fixtureRepo);
     await server.app.close();
   });
 
-  describe('Test', () => {
-    beforeAll(async () => {
-      // Insert season data
-      await seasonRepo.insert(mockRawSeasonData);
-
-      // Insert venue data
-      await venueRepo.insert(mockRawVenueData);
-
-      // Insert venue data
-      await tournamentRepo.insert(mockRawTournamentData);
-
-      // Insert venue data
-      await scoreRepo.insert(mockRawScoreData);
-
-      await wait(1000);
-
-      // Insert team data
-      for (const mock of mockRawTeamData) {
-        const team = new TeamEntity();
-        team.id = mock.id;
-        team.logo = mock.logo;
-        team.name = mock.name;
-        team.code = mock.code;
-        team.tournament = await tournamentRepo.findOneBy({ id: mock.tournamentId });
-        await teamRepo.save(team);
-      }
-
-      await wait(2000);
-      // Insert team data
-      for (const rawData of mockRawFixtureData) {
-        const fixture = new FixtureEntity();
-        fixture.id = rawData.id;
-        fixture.matchDate = rawData.matchDate;
-        fixture.matchTime = rawData.matchTime;
-        fixture.matchStatus = rawData.matchStatus;
-        fixture.round = rawData.round;
-        fixture.tournament = await tournamentRepo.findOneBy({ id: rawData.tournamentId });
-        fixture.season = await seasonRepo.findOneBy({ id: rawData.seasonId });
-        fixture.score = await scoreRepo.findOneBy({ id: rawData.scoreId });
-        fixture.awayTeam = await teamRepo.findOneBy({ id: rawData.awayTeamId });
-        fixture.homeTeam = await teamRepo.findOneBy({ id: rawData.homeTeamId });
-        fixture.venue = await venueRepo.findOneBy({ id: rawData.venueId });
-        await fixtureRepo.save(fixture);
-      }
-    });
-
-
-    afterAll(async () => {
-      await clearDB(fixtureRepo);
-    });
-
+  describe('fixtures', () => {
     it('should return bad request error if startDate entered in the query params but there is no endDate', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        startDate: "2023-05-06 00:00:00.000",
+        startDate: '2023-05-06 00:00:00.000',
       });
 
       const result = res.body;
       expect(res.status).toEqual(400);
-      expect(result.message).toBe("Both endDate and startDate must be required if one of them entered in the query.")
+      expect(result.message).toBe('Both endDate and startDate must be required if one of them entered in the query.');
     });
 
     it('should return bad request error if the query ids over 20 items', async () => {
@@ -125,13 +121,13 @@ describe('fixtures (integration)', () => {
 
       const result = res.body;
       expect(res.status).toEqual(400);
-      expect(result.message).toEqual("List fixtures ids must be less than 20 ids.");
+      expect(result.message).toEqual('List fixtures ids must be less than 20 ids.');
     });
 
     it('should return list of fixtures without any filters', async () => {
       const res = await request.agent.get(`/fixtures`);
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[0].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[0].matchTime);
@@ -178,10 +174,10 @@ describe('fixtures (integration)', () => {
     it('should return list of fixtures with paging (size=1 and page=1)', async () => {
       const res = await request.agent.get(`/fixtures`).query({
         size: 1,
-        page: 1
+        page: 1,
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[0].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[0].matchTime);
@@ -205,10 +201,10 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on team filter', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        team: '4bba27fa-6070-4b24-8f0d-d6681395344e'
+        team: '4bba27fa-6070-4b24-8f0d-d6681395344e',
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[0].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[0].matchTime);
@@ -232,10 +228,10 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on season filter', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        season: "19f6bcd5-e9ca-4d04-8281-e76a5152b9c4"
+        season: '19f6bcd5-e9ca-4d04-8281-e76a5152b9c4',
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[0].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[0].matchTime);
@@ -281,10 +277,10 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on venue filter', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        venue: "6aafaa29-0f7f-4cbd-810a-21ca8760d6cc"
+        venue: '6aafaa29-0f7f-4cbd-810a-21ca8760d6cc',
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[1].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[1].matchTime);
@@ -309,10 +305,10 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on tournament filter', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        tournament: "d515952f-aac5-49d8-8d3c-5b488e6c4988"
+        tournament: 'd515952f-aac5-49d8-8d3c-5b488e6c4988',
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[2].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[2].matchTime);
@@ -337,10 +333,10 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on round filter', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        round: 38
+        round: 38,
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[0].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[0].matchTime);
@@ -365,10 +361,10 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on id filter', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        id: "facb82ee-b1bf-48a0-a987-58ce61e64c52"
+        id: 'facb82ee-b1bf-48a0-a987-58ce61e64c52',
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[0].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[0].matchTime);
@@ -393,10 +389,10 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on multiple ids filters', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        ids: "facb82ee-b1bf-48a0-a987-58ce61e64c52, 3dd58074-2af8-4ac3-b74a-4e6e03b1a836"
+        ids: 'facb82ee-b1bf-48a0-a987-58ce61e64c52, 3dd58074-2af8-4ac3-b74a-4e6e03b1a836',
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[0].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[0].matchTime);
@@ -431,11 +427,10 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on status filters', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        status: "IN-MATCH"
+        status: 'IN-MATCH',
       });
       const result = res.body;
-      const {data} = result;
-
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[1].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[1].matchTime);
@@ -460,12 +455,11 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures between startDate and endDate filters', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        startDate: "2023-05-04T00:00:00.000Z",
-        endDate: "2023-05-05T00:00:00.000Z"
+        startDate: '2023-05-04T00:00:00.000Z',
+        endDate: '2023-05-05T00:00:00.000Z',
       });
       const result = res.body;
-      const {data} = result;
-
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[1].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[1].matchTime);
@@ -501,10 +495,10 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on multiple filters', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        matchDate: "2023-05-04T00:00:00.000Z",
+        matchDate: '2023-05-04T00:00:00.000Z',
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[2].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[2].matchTime);
@@ -529,12 +523,12 @@ describe('fixtures (integration)', () => {
 
     it('should return list of fixtures based on matchDate filters', async () => {
       const res = await request.agent.get(`/fixtures`).query({
-        tournament: "3532d4de-7090-49e9-8785-b003cf17138a",
+        tournament: '3532d4de-7090-49e9-8785-b003cf17138a',
         page: 1,
-        size: 1
+        size: 1,
       });
       const result = res.body;
-      const {data} = result;
+      const { data } = result;
 
       expect(data[0].id).toEqual(mockRawFixtureData[0].id);
       expect(data[0].matchTime).toEqual(mockRawFixtureData[0].matchTime);
@@ -555,6 +549,129 @@ describe('fixtures (integration)', () => {
       expect(result.lastPage).toBe(2);
       expect(result.nextPage).toBe(2);
       expect(result.prevPage).toBeNull();
+    });
+
+    it('should return list empty of fixtures if there is no matching filters', async () => {
+      const res = await request.agent.get(`/fixtures`).query({
+        tournament: 'shshhs',
+      });
+      const result = res.body;
+      const { data } = result;
+
+      expect(res.status).toBe(200);
+      expect(data).toHaveLength(0);
+      expect(result.total).toBe(0);
+    });
+  });
+
+  describe('fixtures calendar', () => {
+    const allResults = [
+      { matchDate: '2023-05-06T00:00:00.000Z', numberOfMatches: '1' },
+      { matchDate: '2023-05-05T00:00:00.000Z', numberOfMatches: '1' },
+      { matchDate: '2023-05-04T00:00:00.000Z', numberOfMatches: '1' },
+    ];
+
+    it('should return bad request error if startDate entered in the query params but there is no endDate', async () => {
+      const res = await request.agent.get(`/calendar`).query({
+        startDate: '2023-05-06 00:00:00.000',
+      });
+
+      const result = res.body;
+      expect(res.status).toEqual(400);
+      expect(result.message).toBe('Both endDate and startDate must be required if one of them entered in the query.');
+    });
+
+    it('should return list of enabled matches dates data without any filters', async () => {
+      const res = await request.agent.get(`/calendar`);
+      const result = res.body;
+      const { enabledMatchDates } = result;
+
+      expect(enabledMatchDates[0].matchDate).toEqual(allResults[0].matchDate);
+      expect(enabledMatchDates[0].numberOfMatches).toEqual(allResults[0].numberOfMatches);
+      expect(enabledMatchDates[1].matchDate).toEqual(allResults[1].matchDate);
+      expect(enabledMatchDates[1].numberOfMatches).toEqual(allResults[1].numberOfMatches);
+      expect(enabledMatchDates[2].matchDate).toEqual(allResults[2].matchDate);
+      expect(enabledMatchDates[2].numberOfMatches).toEqual(allResults[2].numberOfMatches);
+      expect(res.status).toBe(200);
+    });
+
+    it('should return list of enabled matches dates data based on season filter', async () => {
+      const res = await request.agent.get(`/calendar`).query({
+        season: '19f6bcd5-e9ca-4d04-8281-e76a5152b9c4',
+      });
+      const result = res.body;
+      const { enabledMatchDates } = result;
+
+      expect(enabledMatchDates[0].matchDate).toEqual(allResults[0].matchDate);
+      expect(enabledMatchDates[0].numberOfMatches).toEqual(allResults[0].numberOfMatches);
+      expect(enabledMatchDates[1].matchDate).toEqual(allResults[1].matchDate);
+      expect(enabledMatchDates[1].numberOfMatches).toEqual(allResults[1].numberOfMatches);
+      expect(enabledMatchDates[2].matchDate).toEqual(allResults[2].matchDate);
+      expect(enabledMatchDates[2].numberOfMatches).toEqual(allResults[2].numberOfMatches);
+      expect(res.status).toBe(200);
+    });
+
+    it('should return list of enabled matches dates data based on venue filter', async () => {
+      const res = await request.agent.get(`/calendar`).query({
+        venue: '6aafaa29-0f7f-4cbd-810a-21ca8760d6cc',
+      });
+      const result = res.body;
+      const { enabledMatchDates } = result;
+
+      expect(enabledMatchDates[0].matchDate).toEqual(allResults[1].matchDate);
+      expect(enabledMatchDates[0].numberOfMatches).toEqual(allResults[1].numberOfMatches);
+      expect(res.status).toBe(200);
+    });
+
+    it('should return list of enabled matches dates data based on tournament filter', async () => {
+      const res = await request.agent.get(`/calendar`).query({
+        tournament: 'd515952f-aac5-49d8-8d3c-5b488e6c4988',
+      });
+      const result = res.body;
+      const { enabledMatchDates } = result;
+
+      expect(enabledMatchDates[0].matchDate).toEqual(allResults[2].matchDate);
+      expect(enabledMatchDates[0].numberOfMatches).toEqual(allResults[2].numberOfMatches);
+      expect(res.status).toBe(200);
+    });
+
+    it('should return list of enabled matches dates data based on match date filter', async () => {
+      const res = await request.agent.get(`/calendar`).query({
+        matchDate: '2023-05-04T00:00:00.000Z',
+      });
+      const result = res.body;
+      const { enabledMatchDates } = result;
+
+      expect(enabledMatchDates[0].matchDate).toEqual(allResults[2].matchDate);
+      expect(enabledMatchDates[0].numberOfMatches).toEqual(allResults[2].numberOfMatches);
+      expect(res.status).toBe(200);
+    });
+
+    it('should return list of enabled matches dates data between startDate and endDate', async () => {
+      const res = await request.agent.get(`/calendar`).query({
+        startDate: '2023-05-04T00:00:00.000Z',
+        endDate: '2023-05-05T00:00:00.000Z',
+      });
+      const result = res.body;
+      const { enabledMatchDates } = result;
+
+      expect(enabledMatchDates[0].matchDate).toEqual(allResults[1].matchDate);
+      expect(enabledMatchDates[0].numberOfMatches).toEqual(allResults[1].numberOfMatches);
+      expect(enabledMatchDates[1].matchDate).toEqual(allResults[2].matchDate);
+      expect(enabledMatchDates[1].numberOfMatches).toEqual(allResults[2].numberOfMatches);
+      expect(res.status).toBe(200);
+    });
+
+    it('should return list empty of enabled matches dates if there is no matching filters', async () => {
+      const res = await request.agent.get(`/fixtures`).query({
+        tournament: 'shshhs',
+      });
+      const result = res.body;
+      const { data } = result;
+
+      expect(res.status).toBe(200);
+      expect(data).toHaveLength(0);
+      expect(result.total).toBe(0);
     });
   });
 });

@@ -19,7 +19,7 @@ const migrationPath: string = path.join(__dirname, 'src/db/migrations/*.js');
         database: configService.get('app.databaseName'),
         entities: [entityPath],
         migrations: [migrationPath],
-        synchronize: false,
+        synchronize: configService.get('app.nodeEnv') === 'testing',
         autoLoadEntities: true,
         cli: {
           entitiesDir: `apps/${process.env.SERVICE_NAME}/src/db/entities`,
