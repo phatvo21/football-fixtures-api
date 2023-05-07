@@ -19,8 +19,6 @@
     "start:football-fixtures": "cross-env SERVICE_NAME=football-fixtures nest start football-fixtures",
     "start:football-fixtures:dev": "npm run start:football-fixtures --watch",
     "start:football-fixtures:prod": "node dist/apps/football-fixtures/main",
-    "db:restore": "docker-compose exec mongo sh database/restore.sh",
-    "test:e2e": "jest --runInBand --forceExit",
     "test:compose": "docker-compose -f ./docker-compose.testing.yaml up --build -d && npm run football-fixtures:migration:run && npm run test",
     "test": "jest",
     "typeorm": "ts-node --project ./tsconfig.json -r tsconfig-paths/register ./tools/typeorm.custom-cli.ts",

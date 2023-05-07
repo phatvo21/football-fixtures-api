@@ -4,7 +4,7 @@ export class AddConstraint1683262971274 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     // Add constraints to team table
     await queryRunner.addColumn(
-      'team',
+      'teams',
       new TableColumn({
         name: 'tournamentId',
         type: 'varchar',
@@ -12,18 +12,18 @@ export class AddConstraint1683262971274 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'team',
+      'teams',
       new TableForeignKey({
         columnNames: ['tournamentId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'tournament',
+        referencedTableName: 'tournaments',
         onDelete: 'CASCADE',
       }),
     );
 
     // Add constraint to fixture table
     await queryRunner.addColumn(
-      'fixture',
+      'fixtures',
       new TableColumn({
         name: 'tournamentId',
         type: 'varchar',
@@ -31,7 +31,7 @@ export class AddConstraint1683262971274 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      'fixture',
+      'fixtures',
       new TableColumn({
         name: 'seasonId',
         type: 'varchar',
@@ -39,7 +39,7 @@ export class AddConstraint1683262971274 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      'fixture',
+      'fixtures',
       new TableColumn({
         name: 'homeTeamId',
         type: 'varchar',
@@ -47,7 +47,7 @@ export class AddConstraint1683262971274 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      'fixture',
+      'fixtures',
       new TableColumn({
         name: 'awayTeamId',
         type: 'varchar',
@@ -55,7 +55,7 @@ export class AddConstraint1683262971274 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      'fixture',
+      'fixtures',
       new TableColumn({
         name: 'scoreId',
         type: 'varchar',
@@ -63,7 +63,7 @@ export class AddConstraint1683262971274 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      'fixture',
+      'fixtures',
       new TableColumn({
         name: 'venueId',
         type: 'varchar',
@@ -71,61 +71,61 @@ export class AddConstraint1683262971274 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'fixture',
+      'fixtures',
       new TableForeignKey({
         columnNames: ['tournamentId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'tournament',
+        referencedTableName: 'tournaments',
         onDelete: 'CASCADE',
       }),
     );
 
     await queryRunner.createForeignKey(
-      'fixture',
+      'fixtures',
       new TableForeignKey({
         columnNames: ['seasonId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'season',
+        referencedTableName: 'seasons',
         onDelete: 'CASCADE',
       }),
     );
 
     await queryRunner.createForeignKey(
-      'fixture',
+      'fixtures',
       new TableForeignKey({
         columnNames: ['homeTeamId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'team',
+        referencedTableName: 'teams',
         onDelete: 'CASCADE',
       }),
     );
 
     await queryRunner.createForeignKey(
-      'fixture',
+      'fixtures',
       new TableForeignKey({
         columnNames: ['awayTeamId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'team',
+        referencedTableName: 'teams',
         onDelete: 'CASCADE',
       }),
     );
 
     await queryRunner.createForeignKey(
-      'fixture',
+      'fixtures',
       new TableForeignKey({
         columnNames: ['scoreId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'score',
+        referencedTableName: 'scores',
         onDelete: 'CASCADE',
       }),
     );
 
     await queryRunner.createForeignKey(
-      'fixture',
+      'fixtures',
       new TableForeignKey({
         columnNames: ['venueId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'venue',
+        referencedTableName: 'venues',
         onDelete: 'CASCADE',
       }),
     );

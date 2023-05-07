@@ -2,7 +2,7 @@ import { BaseEntity } from '@app/common/enitities';
 import { TournamentEntity } from '@app/football-fixtures/db/entities/tournament.entity';
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
-@Entity({ name: 'team' })
+@Entity({ name: 'teams' })
 export class TeamEntity extends BaseEntity {
   @Column()
   name!: string;

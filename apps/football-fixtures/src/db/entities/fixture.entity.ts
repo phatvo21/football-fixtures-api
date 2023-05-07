@@ -7,7 +7,7 @@ import { TournamentEntity } from '@app/football-fixtures/db/entities/tournament.
 import { VenueEntity } from '@app/football-fixtures/db/entities/venue.entity';
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
-@Entity({ name: 'fixture' })
+@Entity({ name: 'fixtures' })
 export class FixtureEntity extends BaseEntity {
   @Column({
     type: 'enum',

@@ -4,7 +4,7 @@
     "declaration": true,
     "outDir": "../../dist/libs/common"
   },
-  "setupFilesAfterEnv":  ["jest-extended", "../../libs/tests/setup.testing.ts"],
+  "setupFilesAfterEnv": ["jest-extended", "../../libs/tests/setup.testing.ts"],
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
 }

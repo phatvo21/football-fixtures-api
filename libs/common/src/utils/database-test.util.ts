@@ -48,7 +48,7 @@ export const wait = async (time = 500): Promise<unknown> =>
   new Promise((resolve) => setTimeout(() => resolve(''), time));
 
 export const clearDB = async (repo: Repository<any>): Promise<void> => {
-  const tables = ['fixture', 'season', 'team', 'score', 'venue', 'tournament'];
+  const tables = ['fixtures', 'seasons', 'teams', 'scores', 'venues', 'tournaments'];
   for (const table of tables) {
     await repo
       .query('SET FOREIGN_KEY_CHECKS = 0')
