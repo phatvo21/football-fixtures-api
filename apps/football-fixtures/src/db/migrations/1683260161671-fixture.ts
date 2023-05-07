@@ -14,7 +14,11 @@ export class Fixture1683260161671 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'matchDateTime',
+            name: 'matchDate',
+            type: 'varchar',
+          },
+          {
+            name: 'matchTime',
             type: 'varchar',
           },
           {

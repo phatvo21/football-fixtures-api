@@ -1,7 +1,7 @@
 import { getAdapter } from '@app/common/utils/fastify.util';
 import { getCommitHash } from '@app/common/utils/gitCommitHash.util';
 import { AddSwagger } from '@app/common/utils/swagger.util';
-import { ValidationPipe } from '@nestjs/common';
+import { RequestMethod, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
@@ -17,6 +17,9 @@ export const bootstrap = async (appModule, swaggerConfig: { title: string; serve
 
   app.useLogger(app.get(Logger));
   app.useGlobalPipes(new ValidationPipe());
+  app.setGlobalPrefix('api/v1', {
+    exclude: [{ path: 'health', method: RequestMethod.GET }],
+  });
 
   const config: ConfigService = app.get(ConfigService);
 

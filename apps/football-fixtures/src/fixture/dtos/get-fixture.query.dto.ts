@@ -1,7 +1,8 @@
 import { FixtureStatusEnum } from '@app/football-fixtures/db/entities/enum/fixture-status.enum';
-import { FixtureQueryFilter } from '@app/football-fixtures/fixture/interface/fixture-query.filter.interface';
+import { FixtureQueryFilter } from '@app/football-fixtures/fixture/interfaces/fixture-query.filter.interface';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsDateString, IsEnum, IsOptional, IsString, IsUUID, MaxLength } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsArray, IsDateString, IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class GetFixtureQueryDto implements FixtureQueryFilter {
   @IsOptional()
@@ -12,9 +13,12 @@ export class GetFixtureQueryDto implements FixtureQueryFilter {
 
   @IsOptional()
   @IsArray()
-  @MaxLength(20)
-  @ApiProperty({ example: ['4bba27fa-6070-4b24-8f0d-d6681395344e', '8405e257-ff7f-425a-a154-cdac9de265be'] })
-  ids: string[];
+  @Transform((ids) => {
+    const { length } = ids.value.split(',');
+    if (length > 20) return false;
+  })
+  @ApiProperty({ example: '4bba27fa-6070-4b24-8f0d-d6681395344e, 8405e257-ff7f-425a-a154-cdac9de265be' })
+  ids: string;
 
   @IsOptional()
   @IsString()
@@ -51,17 +55,17 @@ export class GetFixtureQueryDto implements FixtureQueryFilter {
 
   @IsOptional()
   @IsDateString()
-  @ApiProperty({ example: '2023-05-06 13:04:20.000' })
+  @ApiProperty({ example: '2023-05-06' })
   matchDate: string;
 
   @IsOptional()
   @IsDateString()
-  @ApiProperty({ example: '2023-05-06 13:04:20.000' })
+  @ApiProperty({ example: '2023-05-06' })
   startDate: string;
 
   @IsOptional()
   @IsDateString()
-  @ApiProperty({ example: '2023-10-06 13:04:20.000' })
+  @ApiProperty({ example: '2023-10-06' })
   endDate: string;
 
   @IsOptional()

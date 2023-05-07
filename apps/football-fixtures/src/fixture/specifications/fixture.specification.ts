@@ -1,4 +1,4 @@
-import { FixtureQueryFilter } from '@app/football-fixtures/fixture/interface/fixture-query.filter.interface';
+import { FixtureQueryFilter } from '@app/football-fixtures/fixture/interfaces/fixture-query.filter.interface';
 import { BadRequestException } from '@nestjs/common';
 
 export class FixtureSpecification {

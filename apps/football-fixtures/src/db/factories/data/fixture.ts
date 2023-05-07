@@ -12,7 +12,8 @@ export const fixtureSeedData = [
   {
     id: '3dd58074-2af8-4ac3-b74a-4e6e03b1a836',
     matchStatus: FixtureStatusEnum.IN_MATCH,
-    matchDateTime: '2023-05-05 09:04:20',
+    matchDate: '2023-05-05',
+    matchTime: '09:04',
     round: 35,
     seasonId: seasonSeedData[12].id,
     tournamentId: tournamentSeedData[0].id,
@@ -24,7 +25,8 @@ export const fixtureSeedData = [
   {
     id: '2cebfea6-bd58-4c79-85dc-144883341c59',
     matchStatus: FixtureStatusEnum.IN_MATCH,
-    matchDateTime: '2023-05-05 09:04:20',
+    matchDate: '2023-05-05',
+    matchTime: '09:04',
     round: 35,
     seasonId: seasonSeedData[12].id,
     tournamentId: tournamentSeedData[0].id,
@@ -36,7 +38,8 @@ export const fixtureSeedData = [
   {
     id: '1cc33de0-2364-4d8c-9a06-df90cd423995',
     matchStatus: FixtureStatusEnum.IN_MATCH,
-    matchDateTime: '2023-05-05 09:04:20',
+    matchDate: '2023-05-05',
+    matchTime: '09:04',
     round: 35,
     seasonId: seasonSeedData[12].id,
     tournamentId: tournamentSeedData[1].id,
@@ -48,7 +51,8 @@ export const fixtureSeedData = [
   {
     id: 'b68cce3c-5a0c-42e3-8c27-3238b8edda86',
     matchStatus: FixtureStatusEnum.IN_MATCH,
-    matchDateTime: '2023-05-05 09:04:20',
+    matchDate: '2023-05-05',
+    matchTime: '09:04',
     round: 35,
     seasonId: seasonSeedData[12].id,
     tournamentId: tournamentSeedData[1].id,
@@ -60,7 +64,8 @@ export const fixtureSeedData = [
   {
     id: '338b2f0a-9ddb-462c-91e2-deed309bdee2',
     matchStatus: FixtureStatusEnum.IN_MATCH,
-    matchDateTime: '2023-05-05 09:04:20',
+    matchDate: '2023-05-05',
+    matchTime: '09:04',
     seasonId: seasonSeedData[12].id,
     round: 35,
     tournamentId: tournamentSeedData[2].id,
@@ -72,7 +77,8 @@ export const fixtureSeedData = [
   {
     id: '08a4a178-0d56-42be-90e8-803d6b5489fa',
     matchStatus: FixtureStatusEnum.IN_MATCH,
-    matchDateTime: '2023-05-05 09:04:20',
+    matchDate: '2023-05-05',
+    matchTime: '09:04',
     seasonId: seasonSeedData[12].id,
     round: 35,
     tournamentId: tournamentSeedData[2].id,
@@ -84,7 +90,8 @@ export const fixtureSeedData = [
   {
     id: '1facd1d1-a2c6-4def-87bd-a3da67fc0a72',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2023-05-04 17:40:20',
+    matchDate: '2023-05-04',
+    matchTime: '17:40',
     round: 30,
     seasonId: seasonSeedData[12].id,
     tournamentId: tournamentSeedData[0].id,
@@ -96,7 +103,8 @@ export const fixtureSeedData = [
   {
     id: '7054e7d9-3b67-4d81-8b76-100bb1c30c70',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2023-05-04 17:40:20',
+    matchDate: '2023-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[12].id,
     round: 30,
     tournamentId: tournamentSeedData[0].id,
@@ -108,7 +116,8 @@ export const fixtureSeedData = [
   {
     id: '3fd12b6f-7979-4d56-9627-fb5e57e37515',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2023-05-04 17:40:20',
+    matchDate: '2023-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[12].id,
     round: 30,
     tournamentId: tournamentSeedData[1].id,
@@ -120,7 +129,8 @@ export const fixtureSeedData = [
   {
     id: '77aeccd4-8886-42ef-8760-c82b97cb5b2b',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2023-05-04 17:40:20',
+    matchDate: '2023-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[12].id,
     round: 30,
     tournamentId: tournamentSeedData[1].id,
@@ -132,7 +142,8 @@ export const fixtureSeedData = [
   {
     id: '76db57b7-bdd6-470e-b0e8-f3eb8edac9ed',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2023-05-04 17:40:20',
+    matchDate: '2023-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[12].id,
     round: 30,
     tournamentId: tournamentSeedData[2].id,
@@ -144,7 +155,8 @@ export const fixtureSeedData = [
   {
     id: 'a560618b-faf3-4e28-983d-ce7e08e1ce55',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2023-05-04 17:40:20',
+    matchDate: '2023-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[12].id,
     round: 30,
     tournamentId: tournamentSeedData[2].id,
@@ -156,7 +168,8 @@ export const fixtureSeedData = [
   {
     id: 'facb82ee-b1bf-48a0-a987-58ce61e64c52',
     matchStatus: FixtureStatusEnum.NEW,
-    matchDateTime: '2023-05-06 20:04:20',
+    matchDate: '2023-05-06',
+    matchTime: '17:40',
     seasonId: seasonSeedData[12].id,
     round: 38,
     tournamentId: tournamentSeedData[0].id,
@@ -168,7 +181,8 @@ export const fixtureSeedData = [
   {
     id: 'b01144e1-b74e-465a-a406-c62fc60f4550',
     matchStatus: FixtureStatusEnum.NEW,
-    matchDateTime: '2023-05-06 20:04:20',
+    matchDate: '2023-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[12].id,
     round: 38,
     tournamentId: tournamentSeedData[0].id,
@@ -180,7 +194,8 @@ export const fixtureSeedData = [
   {
     id: '0c146379-140a-457b-b4ad-05db6379968b',
     matchStatus: FixtureStatusEnum.NEW,
-    matchDateTime: '2023-05-06 20:04:20',
+    matchDate: '2023-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[12].id,
     round: 38,
     tournamentId: tournamentSeedData[1].id,
@@ -192,7 +207,8 @@ export const fixtureSeedData = [
   {
     id: '024ddccf-a3d8-4e6a-a23a-295a44015655',
     matchStatus: FixtureStatusEnum.NEW,
-    matchDateTime: '2023-05-06 20:04:20',
+    matchDate: '2023-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[12].id,
     round: 38,
     tournamentId: tournamentSeedData[1].id,
@@ -204,7 +220,8 @@ export const fixtureSeedData = [
   {
     id: 'b014d5b1-5b91-4ad2-a903-a8a07b372423',
     matchStatus: FixtureStatusEnum.NEW,
-    matchDateTime: '2023-05-06 20:04:20',
+    matchDate: '2023-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[12].id,
     round: 38,
     tournamentId: tournamentSeedData[2].id,
@@ -216,7 +233,8 @@ export const fixtureSeedData = [
   {
     id: 'f5a61f22-065e-4b00-b65f-045358239daf',
     matchStatus: FixtureStatusEnum.NEW,
-    matchDateTime: '2023-05-06 20:04:20',
+    matchDate: '2023-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[12].id,
     round: 38,
     tournamentId: tournamentSeedData[2].id,
@@ -228,7 +246,8 @@ export const fixtureSeedData = [
   {
     id: 'ea23577c-0be2-4553-9881-bb21eb439f41',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2022-05-05 09:04:20',
+    matchDate: '2022-05-05',
+    matchTime: '09:04',
     seasonId: seasonSeedData[11].id,
     round: 20,
     tournamentId: tournamentSeedData[0].id,
@@ -240,7 +259,8 @@ export const fixtureSeedData = [
   {
     id: '401457e5-72eb-4f46-81ab-fae96f47062e',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2022-05-05 09:04:20',
+    matchDate: '2022-05-05',
+    matchTime: '09:04',
     seasonId: seasonSeedData[11].id,
     round: 20,
     tournamentId: tournamentSeedData[0].id,
@@ -252,7 +272,8 @@ export const fixtureSeedData = [
   {
     id: 'e7e64efd-4337-4208-b00e-2ba1e213001c',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2022-05-05 09:04:20',
+    matchDate: '2022-05-05',
+    matchTime: '09:04',
     seasonId: seasonSeedData[11].id,
     round: 20,
     tournamentId: tournamentSeedData[1].id,
@@ -264,7 +285,8 @@ export const fixtureSeedData = [
   {
     id: '753fa7d4-5cb0-4e85-a098-bbbcee54e741',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2022-05-05 09:04:20',
+    matchDate: '2022-05-05',
+    matchTime: '09:04',
     seasonId: seasonSeedData[11].id,
     round: 20,
     tournamentId: tournamentSeedData[1].id,
@@ -276,7 +298,8 @@ export const fixtureSeedData = [
   {
     id: 'a41b1c45-649d-496b-bbaf-0860be549eb4',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2022-05-05 09:04:20',
+    matchDate: '2022-05-05',
+    matchTime: '09:04',
     seasonId: seasonSeedData[11].id,
     round: 20,
     tournamentId: tournamentSeedData[2].id,
@@ -288,7 +311,8 @@ export const fixtureSeedData = [
   {
     id: '5a9456ae-91f9-449b-a8e8-a627a4ad134c',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2022-05-05 09:04:20',
+    matchDate: '2022-05-05',
+    matchTime: '09:04',
     seasonId: seasonSeedData[11].id,
     round: 20,
     tournamentId: tournamentSeedData[2].id,
@@ -300,7 +324,8 @@ export const fixtureSeedData = [
   {
     id: '81ba3d53-1139-4d4e-a2f1-c4e81bf7b7a4',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2020-05-04 17:40:20',
+    matchDate: '2020-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[10].id,
     round: 20,
     tournamentId: tournamentSeedData[0].id,
@@ -312,7 +337,8 @@ export const fixtureSeedData = [
   {
     id: 'd1a202b3-c969-4cf9-8b0b-16cd3e991244',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2020-05-04 17:40:20',
+    matchDate: '2020-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[10].id,
     round: 20,
     tournamentId: tournamentSeedData[0].id,
@@ -324,7 +350,8 @@ export const fixtureSeedData = [
   {
     id: '77974332-2dfd-4922-ab9d-4400217f808a',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2020-05-04 17:40:20',
+    matchDate: '2020-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[10].id,
     round: 20,
     tournamentId: tournamentSeedData[1].id,
@@ -336,7 +363,8 @@ export const fixtureSeedData = [
   {
     id: '428f183f-8855-446b-bb4e-6560971171e4',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2020-05-04 17:40:20',
+    matchDate: '2020-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[10].id,
     round: 20,
     tournamentId: tournamentSeedData[1].id,
@@ -348,7 +376,8 @@ export const fixtureSeedData = [
   {
     id: 'b29b06b1-2d0a-4a6f-8d90-2f1f26e35a3f',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2020-05-04 17:40:20',
+    matchDate: '2020-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[10].id,
     round: 20,
     tournamentId: tournamentSeedData[2].id,
@@ -360,7 +389,8 @@ export const fixtureSeedData = [
   {
     id: '674684eb-819c-4800-9a79-35bb5072ba70',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2020-05-04 17:40:20',
+    matchDate: '2020-05-04',
+    matchTime: '17:40',
     seasonId: seasonSeedData[10].id,
     round: 20,
     tournamentId: tournamentSeedData[2].id,
@@ -372,7 +402,8 @@ export const fixtureSeedData = [
   {
     id: '9125dd13-ecfa-443c-9a43-b85b4ce8398e',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2019-05-06 20:04:20',
+    matchDate: '2019-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[9].id,
     round: 20,
     tournamentId: tournamentSeedData[0].id,
@@ -384,7 +415,8 @@ export const fixtureSeedData = [
   {
     id: '8ba64655-c1a7-483f-a6c1-6ec54985d2ec',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2019-05-06 20:04:20',
+    matchDate: '2019-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[9].id,
     round: 20,
     tournamentId: tournamentSeedData[0].id,
@@ -396,7 +428,8 @@ export const fixtureSeedData = [
   {
     id: '12ca9200-3296-43d3-8781-d192a2efb4af',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2019-05-06 20:04:20',
+    matchDate: '2019-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[9].id,
     round: 20,
     tournamentId: tournamentSeedData[1].id,
@@ -408,7 +441,8 @@ export const fixtureSeedData = [
   {
     id: 'ba355128-192b-4f3f-8171-ea5152b75d06',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2019-05-06 20:04:20',
+    matchDate: '2019-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[9].id,
     round: 20,
     tournamentId: tournamentSeedData[1].id,
@@ -420,7 +454,8 @@ export const fixtureSeedData = [
   {
     id: '4ac03cd0-1cd7-486a-acee-41145e81ecce',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2019-05-06 20:04:20',
+    matchDate: '2019-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[9].id,
     round: 20,
     tournamentId: tournamentSeedData[2].id,
@@ -432,7 +467,8 @@ export const fixtureSeedData = [
   {
     id: 'feb68891-17c6-4abb-a90d-7e7c16871981',
     matchStatus: FixtureStatusEnum.PLAYED,
-    matchDateTime: '2019-05-06 20:04:20',
+    matchDate: '2019-05-06',
+    matchTime: '20:04',
     seasonId: seasonSeedData[9].id,
     round: 20,
     tournamentId: tournamentSeedData[2].id,

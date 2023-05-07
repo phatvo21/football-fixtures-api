@@ -56,7 +56,8 @@ export default class InitializedSeeder implements Seeder {
     for (const seed of fixtureSeedData) {
       const fixture = new FixtureEntity();
       fixture.id = seed.id;
-      fixture.matchDateTime = seed.matchDateTime as unknown as Date;
+      fixture.matchDate = seed.matchDate as unknown as Date;
+      fixture.matchTime = seed.matchTime;
       fixture.matchStatus = seed.matchStatus;
       fixture.round = seed.round;
       fixture.tournament = await tournamentRepository.findOneBy({ id: seed.tournamentId });

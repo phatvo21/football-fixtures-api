@@ -8,12 +8,12 @@ export const defaultColumns = [
   },
   {
     name: 'createdAt',
-    type: 'timestamp',
+    type: 'datetime',
     default: 'now()',
   },
   {
     name: 'updatedAt',
-    type: 'timestamp',
+    type: 'datetime',
     default: 'now()',
   },
 ];

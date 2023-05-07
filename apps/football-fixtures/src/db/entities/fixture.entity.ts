@@ -15,11 +15,14 @@ export class FixtureEntity extends BaseEntity {
   })
   matchStatus!: FixtureStatusEnum;
 
-  @Column()
+  @CreateDateColumn()
   round!: number;
 
-  @CreateDateColumn()
-  matchDateTime!: Date;
+  @Column()
+  matchDate!: Date;
+
+  @Column()
+  matchTime!: string;
 
   @OneToOne(() => SeasonEntity, { cascade: true })
   @JoinColumn({ name: 'seasonId' })

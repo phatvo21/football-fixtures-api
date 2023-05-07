@@ -14,6 +14,17 @@ export interface Paginate {
   prevPage: number;
 }
 
+export interface PaginateTakeSkip {
+  take: number;
+  skip: number;
+  page: number;
+}
+
+/**
+ * Pagination aggregates data, indicates the current, previous, next, last page and current size
+ * @param {PaginateParams} params - The paginate parameters use for the computation
+ * @return {Paginate} - Current information of a pagination
+ */
 export const paginateAggregation = (params: PaginateParams): Paginate => {
   const currentPage: number = Math.round(params.page);
   const size: number = Math.round(params.take);
@@ -32,7 +43,12 @@ export const paginateAggregation = (params: PaginateParams): Paginate => {
   };
 };
 
-export const paginateTakeSkipCalculation = (params: PaginateParams): { take: number; skip: number; page: number } => {
+/**
+ * Pagination skip, take which are represents limit and offset for the paginate data
+ * @param {PaginateParams} params - The paginate parameters use for the computation
+ * @return {PaginateTakeSkip} - Current limit, offer and page of a pagination
+ */
+export const paginateTakeSkipCalculation = (params: PaginateParams): PaginateTakeSkip => {
   const take: number = params?.size ?? 10;
   const page: number = params?.page ?? 1;
   const skip: number = (page - 1) * take;

@@ -9,6 +9,7 @@ import { FixtureRepository } from '@app/football-fixtures/fixture/data/repositor
 import { TestRepository } from '@app/football-fixtures/fixture/data/repositories/test.repository';
 import { FixtureController } from '@app/football-fixtures/fixture/fixture.controller';
 import { FixtureService } from '@app/football-fixtures/fixture/fixture.service';
+import { FixtureCalendarController } from '@app/football-fixtures/fixture/fixture-calendar.controller';
 import { TestController } from '@app/football-fixtures/fixture/test.controller';
 import { TestService } from '@app/football-fixtures/fixture/test.service';
 import { Module } from '@nestjs/common';
@@ -38,6 +39,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TestService,
     FixtureService,
   ],
-  controllers: [FixtureController, TestController],
+  controllers: [FixtureController, FixtureCalendarController, TestController],
 })
 export class FixtureModule {}
