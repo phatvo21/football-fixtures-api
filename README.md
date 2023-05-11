@@ -1,4 +1,4 @@
-# Service serves simple apis management.
+# Service aggregates football fixtures and exposes the APIs to serves the expectations requests.
 
 - [Introduction](#introduction)
 - [Database](#database)
@@ -25,7 +25,7 @@
 
 
 ## Introduction
-Service aggregates football fixtures and exposes the APIs to sever the expectations requests
+Service aggregates football fixtures and exposes the APIs to serves the expectations requests
 
 
 ## Database
