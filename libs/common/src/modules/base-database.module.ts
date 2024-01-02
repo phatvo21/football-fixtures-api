@@ -25,6 +25,7 @@ const migrationPath: string = path.join(__dirname, 'src/db/migrations/*.js');
           entitiesDir: `apps/${process.env.SERVICE_NAME}/src/db/entities`,
           migrationsDir: `apps/${process.env.SERVICE_NAME}/src/db/migrations`,
         },
+        connectTimeout: 60_000,
       }),
       inject: [ConfigService],
     }),

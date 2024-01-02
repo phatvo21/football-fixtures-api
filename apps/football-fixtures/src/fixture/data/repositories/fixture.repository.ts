@@ -35,7 +35,7 @@ export class FixtureRepository extends BaseRepository<FixtureEntity> implements 
 
     // Create a query builder based on fixture and join all the relations table
     // Here we aim to get all the data from fixture as well as the relations tables
-    const queryBuilder: SelectQueryBuilder<FixtureEntity> = await this.fixtureRepo
+    const queryBuilder: SelectQueryBuilder<FixtureEntity> = this.fixtureRepo
       .createQueryBuilder('fixture')
       .leftJoinAndSelect('fixture.season', 'season')
       .leftJoinAndSelect('fixture.venue', 'venue')
@@ -65,7 +65,7 @@ export class FixtureRepository extends BaseRepository<FixtureEntity> implements 
   public async getAllEnabledMatches(filters: FixtureQueryFilter): Promise<FixtureEnabledMatchesResponse> {
     // Create a query builder based on fixture and join 3 needed relation tables (season, venue, tournament)
     // Here we aim to get all the enabled matches with the same dates and allows to filter by season, venue or tournament
-    const queryBuilder: SelectQueryBuilder<FixtureEntity> = await this.fixtureRepo
+    const queryBuilder: SelectQueryBuilder<FixtureEntity> = this.fixtureRepo
       .createQueryBuilder('fixture')
       .leftJoinAndSelect('fixture.season', 'season')
       .leftJoinAndSelect('fixture.venue', 'venue')
