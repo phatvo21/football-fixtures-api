@@ -1,11 +1,11 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as dotenv from 'dotenv';
-
 import { DataSource } from 'typeorm';
 import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
 import { SeederOptions } from 'typeorm-extension';
 
 dotenv.config({
-  path: "apps/football-fixtures/.env"
+  path: 'apps/football-fixtures/.env',
 });
 
 /**
