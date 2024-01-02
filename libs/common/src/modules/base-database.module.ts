@@ -26,7 +26,7 @@ const migrationPath: string = path.join(__dirname, 'src/db/migrations/*.js');
           migrationsDir: `apps/${process.env.SERVICE_NAME}/src/db/migrations`,
         },
         connectTimeout: 60_000,
-        connectorPackage: 'mysql',
+        connectorPackage: 'mysql2',
       }),
       inject: [ConfigService],
     }),
